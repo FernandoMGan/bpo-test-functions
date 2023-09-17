@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/BpoHeaderStyles.css">
+    <title>Simulación de Ascensores</title>
+    <style>
+        :root {
+            /* Estilos Universales */
+            /* Especificos de color */
+            --bpo-wa-base-background: #fcf8c6;
+            --bpo-wa-base-menu: white;
+            --bpo-wa-border-bloque: gray;
+            --bpo-wa-border-foco-fondo: lightgray;
+            --bpo-wa-border-foco-txt: blue;
+            --bpo-wa-box-proyect: orange;
+            --bpo-wa-test-01: rgb(219, 127, 158);
+            --bpo-wa-test-02: rgb(200, 60, 83);
+            --bpo-wa-test-03: rgb(255, 0, 0);
+            --bpo-wa-test-04: rgb(214, 178, 255);
+            --bpo-wa-test-05: rgb(175, 40, 238);
+            /* Especificos de unidades de medida */
+            --bpo-unit-spacing: 0.25em;
+        }
+
+        body {
+            background-color: var(--bpo-wa-base-background);
+            margin: 0px;
+        }
+
+        .proyect-title {
+            display: flex;
+            /* position: fixed; */
+            border: 1px solid var(--bpo-wa-box-proyect);
+            border-radius: calc(var(--bpo-unit-spacing) * 2);
+            font-size: smaller;
+            text-align: center;
+            top: calc((var(--bpo-unit-spacing) * 4) + (var(--bpo-unit-spacing) * 6.5));
+            height: calc(var(--bpo-unit-spacing) * 2);
+            width: 98%;
+            margin: calc(var(--bpo-unit-spacing) * 0.50) calc(var(--bpo-unit-spacing) * 3) calc(var(--bpo-unit-spacing) * 1) calc(var(--bpo-unit-spacing) * 2);
+            padding: calc(var(--bpo-unit-spacing)*2);
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+    <style>
+        .btns {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .btn:nth-child(1) {
+            position: fixed;
+            top: 100px;
+            margin-top: calc(20px*1);
+        }
+
+        .btn:nth-child(2) {
+            position: fixed;
+            top: 125px;
+            margin-top: calc(20px*2);
+        }
+
+        .btn:nth-child(3) {
+            position: fixed;
+            top: 150px;
+            margin-top: calc(20px*3);
+        }
+
+        .btn:nth-child(4) {
+            position: fixed;
+            top: 175px;
+            margin-top: calc(20px*4);
+        }
+
+
+
+        .btn:nth-child(5) {
+            position: fixed;
+            top: 175px;
+            margin-top: calc(20px*8);
+        }
+
+        .btn:nth-child(6) {
+            position: fixed;
+            top: 175px;
+            margin-top: calc(20px*10);
+        }
+
+        .btn:nth-child(7) {
+            position: fixed;
+            top: 175px;
+            margin-top: calc(20px*12);
+        }
+
+        .btn:nth-child(8) {
+            position: fixed;
+            top: 175px;
+            margin-top: calc(20px*14);
+        }
+
+        .buildingA,
+        .buildingB,
+        .buildingC {
+            width: 120px;
+            height: 600px;
+            background-color: #ccc;
+            float: left;
+            margin: 80px 10px 10px 10px;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .window {
+            width: 100px;
+            height: 100px;
+            background-color: #87CEEB;
+            margin: 10px auto;
+        }
+
+        .elevatorA,
+        .elevatorB,
+        .elevatorC {
+            width: 50px;
+            height: 50px;
+            background-color: #00FF00;
+            position: absolute;
+            transition: top 2s ease-in-out;
+        }
+
+        .elevatorFloor {
+            background-color: #FF0000;
+        }
+
+        .edificio {
+            display: inline-flex;
+            background-color: green;
+            color: white;
+
+            font-weight: bold;
+            width: 100px;
+            height: 30px;
+            margin: 10px auto;
+
+            align-items: center;
+            justify-content: center;
+        }
+
+        .elevatorPB {
+            background-color: red;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav">
+        <div class="navBoxBrand">
+            <img class="navImg" id="" src="./assets/buttons-svg/list.svg" alt="Menu Hamburguesa">
+            <img class="navImg" id="" src="./assets/logos/logoCombinado.png" alt="Logo Combinado">
+            Bpo Change ( Se parte del cambio )
+        </div>
+        <div class="nav-lang" id="idNavIconGlobe">
+            <img class="navImg" id="" src="./assets/buttons-svg/globe.svg" alt="Selector de Idiomas">
+            <p>Latino</p>
+        </div>
+        <div class="navBoxAcount">
+            <img class="navImg" id="" src="./assets/buttons-svg/bell.svg" alt="Campanita de Notificaciones">
+            <img class="navImg" id="" src="./assets/buttons/butLogOff.png" alt="Loguin Off / In de Usuario">
+        </div>
+
+    </div>
+    <div class="proyect-title">
+        Bpo Change - Testeando - Etapas de Loguin - Devel: Fernando M. Gan
+    </div>
+    <div class="buildingA">
+        <div class="window"></div>
+        <div class="window"></div>
+        <div class="window"></div>
+        <div class="window"></div>
+        <div class="window"></div>
+        <div class="edificio elevatorPB" id="bldFloor0A">Edificio A</div>
+    </div>
+
+    <div class="buildingB">
+        <div class="window"></div>
+        <div class="window"></div>
+        <div class="window"></div>
+        <div class="window"></div>
+        <div class="window"></div>
+        <div class="edificio elevatorPB" id="bldFloor0B">Edificio B</div>
+    </div>
+
+    <div class="buildingC">
+        <div class="window"></div>
+        <div class="window"></div>
+        <div class="window"></div>
+        <div class="window"></div>
+        <div class="window"></div>
+        <div class="edificio elevatorPB" id="bldFloor0C">Edificio C</div>
+    </div>
+
+    <script>
+        var elevatorA = 0;
+        var elevatorB = 0;
+        var elevatorC = 0;
+        var isGoingUpA = true; // Variable para controlar la dirección del ascensor A
+        var isGoingUpB = true; // Variable para controlar la dirección del ascensor B
+        var isGoingUpC = true; // Variable para controlar la dirección del ascensor C
+        const pisosPorEdificio = 5;
+
+        function moveElevatorsOld() {
+            // elevators.forEach((elevator, index) => {
+            //     setTimeout(() => {
+            //         elevator.style.top = (100 * (index + 1)) + 'px';
+            //         // Cambiar la clase del edificio para resaltar la ventana
+            //         document.querySelector(`.building:nth-child(${index + 1})`).classList.add(`elevator-floor-${index + 1}`);
+            //     }, 2000 * index);
+            // });
+        }
+
+        function moveElevators(pBtnElev) {
+            // Logica de movimiento de ascensor
+            switch (pBtnElev) {
+                case 'a':
+                    console.log('Presionaste Elevator A, Posicion Antes >: ' + elevatorA);
+                    // Obtener todos los elementos con la clase "elevatorPB"
+                    const elevFloorA = document.getElementById("bldFloor0A");
+
+                    if (elevatorA == 5) {
+                        elevatorA = 0; // Posiciona en planta baja el ascensor
+                        // Enciende luz del ascensor en el elemento elevFloorA
+                        elevFloorA.classList.add("elevatorPB");
+                    } else {
+                        elevatorA++; // Sube el elevator
+                        // Apaga la luz del ascensor en el elemento elevFloorA
+                        elevFloorA.classList.remove("elevatorPB");
+                    }
+                    console.log('Presionaste Elevator A, Posicion Posterior >: ' + elevatorA);
+                    updateBuilding('a', elevatorA);
+                    break;
+                case 'b':
+                    console.log('Presionaste Elevator B, Posicion Antes >: ' + elevatorB);
+                    // Obtener todos los elementos con la clase "elevatorPB"
+                    const elevFloorB = document.getElementById("bldFloor0B");
+
+                    if (elevatorB == 5) {
+                        elevatorB = 0; // Posiciona en planta baja el ascensor
+                        // Enciende luz del ascensor en el elemento elevFloorB
+                        elevFloorB.classList.add("elevatorPB");
+                    } else {
+                        elevatorB++; // Sube el elevator
+                        // Apaga la luz del ascensor en el elemento elevFloorB
+                        elevFloorB.classList.remove("elevatorPB");
+                    }
+                    console.log('Presionaste Elevator B, Posicion Posterior >: ' + elevatorB);
+                    updateBuilding('b', elevatorB);
+                    break;
+                case 'c':
+                    console.log('Presionaste Elevator C, Posicion Antes >: ' + elevatorC);
+                    // Obtener todos los elementos con la clase "elevatorPB"
+                    const elevFloorC = document.getElementById("bldFloor0C");
+
+                    if (elevatorC == 5) {
+                        elevatorC = 0; // Posiciona en planta baja el ascensor
+                        // Enciende luz del ascensor en el elemento elevFloorC
+                        elevFloorC.classList.add("elevatorPB");
+                    } else {
+                        elevatorC++; // Sube el elevator
+                        // Apaga la luz del ascensor en el elemento elevFloorC
+                        elevFloorC.classList.remove("elevatorPB");
+                    }
+                    console.log('Presionaste Elevator C, Posicion Posterior >: ' + elevatorC);
+                    updateBuilding('c', elevatorC);
+                    break;
+                case 'abc':
+                    console.log('Seleccionaste la opción ABC');
+                    moveElevators('a');
+                    moveElevators('b');
+                    moveElevators('c');
+                    break;
+                default:
+                    console.log('Opción no válida');
+            }
+        }
+
+        function updateBuilding(pElevator, pFloor) {
+            switch (pElevator) {
+                case 'a':
+                    // Remover todas las clases relacionadas con los pisos en el Edificio A
+                    const bildElevA = document.querySelectorAll('.buildingA .window');
+                    for (let i = 1; i <= 5; i++) {
+                        // Apaga todas las luces de la ventana
+                        bildElevA[i - 1].classList.remove('elevatorPB');
+                    }
+                    // Agregar la clase correspondiente al piso actual del ascensor A
+                    if (pFloor !== 0) {
+                        bildElevA[(pisosPorEdificio - pFloor)].classList.add('elevatorPB');
+                    }
+                    break;
+                case 'b':
+                    // Remover todas las clases relacionadas con los pisos en el Edificio B
+                    const bildElevB = document.querySelectorAll('.buildingB .window');
+                    for (let i = 1; i <= 5; i++) {
+                        // Apaga todas las luces de la ventana
+                        bildElevB[i - 1].classList.remove('elevatorPB');
+                    }
+                    // Agregar la clase correspondiente al piso actual del ascensor B
+                    if (pFloor !== 0) {
+                        bildElevB[(pisosPorEdificio - pFloor)].classList.add('elevatorPB');
+                    }
+                    break;
+                case 'c':
+                    // Remover todas las clases relacionadas con los pisos en el Edificio C
+                    const bildElevC = document.querySelectorAll('.buildingC .window');
+                    for (let i = 1; i <= 5; i++) {
+                        // Apaga todas las luces de la ventana
+                        bildElevC[i - 1].classList.remove('elevatorPB');
+                    }
+                    // Agregar la clase correspondiente al piso actual del ascensor C
+                    if (pFloor !== 0) {
+                        bildElevC[(pisosPorEdificio - pFloor)].classList.add('elevatorPB');
+                    }
+                    break;
+                default:
+                    console.log('Opción no válida');
+            }
+        }
+
+    </script>
+    <div class="btns">
+        <button class="btn" onclick="moveElevators('a')">Sincronico Sube Ascensores Edificio A</button>
+        <button class="btn" onclick="moveElevators('b')">Sincronico Sube Ascensores Edificio B</button>
+        <button class="btn" onclick="moveElevators('c')">Sincronico Sube Ascensores Edificio C</button>
+        <button class="btn" onclick="moveElevators('abc')">Sincronico Sube Ascensores Edificio A, B y C</button>
+
+        <button class="btn" onclick="setTimeout(function() {moveElevators('a');}, 2500);">Asincronico (2.5 segundos) Sube
+            Ascensores Edificio A</button> <!-- 2000 milisegundos = 2 segundos -->
+        <button class="btn" onclick="setTimeout(function() {moveElevators('b');}, 2500);">Asincronico (2.5 segundos) Sube
+            Ascensores Edificio B</button> <!-- 2000 milisegundos = 2 segundos -->
+        <button class="btn" onclick="setTimeout(function() {moveElevators('c');}, 2500);">Asincronico (2.5 segundos) Sube
+            Ascensores Edificio C</button> <!-- 2000 milisegundos = 2 segundos -->
+        <button class="btn" onclick="setTimeout(function() {moveElevators('abc');}, 2500);">Asincronico (2.5 segundos)
+            Sube Ascensores Edificio A, B y C</button> <!-- 2000 milisegundos = 2 segundos -->
+
+
+
+    </div>
+</body>
+
+</html>
